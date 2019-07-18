@@ -99,4 +99,35 @@ public class MeasurementTest {
 
         assertEquals(expectedMeasurement, twoMeters);
     }
+
+    @Test
+    public void subtract_shouldReturnPointNine_when1KilogramSubtractedWith100Gram() {
+        Measurement oneKilogram = new Measurement(1, Unit.KILOGRAM);
+        Measurement hundredGrams = new Measurement(100, Unit.GRAM);
+        Measurement expectedMeasurement = new Measurement(.9, Unit.KILOGRAM);
+
+        Measurement pointNineGrams = oneKilogram.subtract(hundredGrams);
+
+        assertEquals(expectedMeasurement, pointNineGrams);
+    }
+
+    @Test
+    public void subtract_shouldReturnZero_when1KilogramSubtractedWith1000Gram() {
+        Measurement oneKilogram = new Measurement(1, Unit.KILOGRAM);
+        Measurement thousandGrams = new Measurement(1000, Unit.GRAM);
+        Measurement expectedMeasurement = new Measurement(0, Unit.KILOGRAM);
+
+        Measurement zeroKilogram = oneKilogram.subtract(thousandGrams);
+
+        assertEquals(expectedMeasurement, zeroKilogram);
+    }
+
+    @Test(expected = InvalidTypeConversionException.class)
+    public void subtract_shouldReturnException_when1KilometerSubtractedWith1000Gram() {
+        Measurement oneKilometer = new Measurement(1, Unit.KILOMETER);
+        Measurement thousandGrams = new Measurement(1000, Unit.GRAM);
+
+        oneKilometer.subtract(thousandGrams);
+
+    }
 }

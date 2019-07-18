@@ -27,4 +27,9 @@ public class Measurement {
         return new Measurement(sum, this.unit);
 
     }
+
+    public Measurement subtract(Measurement anotherMeasurement) {
+        double difference = this.value - anotherMeasurement.unit.convertTo(anotherMeasurement.value, this.unit);
+        return new Measurement(difference, this.unit);
+    }
 }
