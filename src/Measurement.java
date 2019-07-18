@@ -14,14 +14,6 @@ public class Measurement {
         return anotherMeasurement.value == this.value;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Measurement measurement = (Measurement) o;
-        return isEqual(measurement);
-    }
-
     public Measurement add(Measurement anotherMeasurement) {
         double sum = anotherMeasurement.unit.convertTo(anotherMeasurement.value, this.unit) + this.value;
         return new Measurement(sum, this.unit);
@@ -31,5 +23,18 @@ public class Measurement {
     public Measurement subtract(Measurement anotherMeasurement) {
         double difference = this.value - anotherMeasurement.unit.convertTo(anotherMeasurement.value, this.unit);
         return new Measurement(difference, this.unit);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Value: %.2f, Unit : %s", this.value, this.unit);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Measurement measurement = (Measurement) o;
+        return isEqual(measurement);
     }
 }
