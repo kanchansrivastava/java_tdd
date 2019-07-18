@@ -1,3 +1,3 @@
 public enum UnitType {
-    WEIGHT, DISTANCE;
+    WEIGHT, DISTANCE, TEMPERATURE;
 }

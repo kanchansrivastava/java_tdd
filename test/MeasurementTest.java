@@ -130,4 +130,14 @@ public class MeasurementTest {
         oneKilometer.subtract(thousandGrams);
 
     }
+
+    @Test
+    public void convertTo_shouldReturnTrue_whenGiven100CelsiusEqualsToFahrenheit() {
+        Measurement hundredCelsius = new Measurement(100, Unit.CELSIUS);
+        Measurement twoHundredTwelveFahrenheit = new Measurement(212, Unit.FAHRENHEIT);
+
+        assertEquals(hundredCelsius, twoHundredTwelveFahrenheit);
+
+
+    }
 }

@@ -32,4 +32,31 @@ public class UnitTest {
         assertEquals(1, result, 0.0);
     }
 
+    @Test
+    public void convertTo_shouldReturn32_whenConverting0CelsiusToFahrenheit(){
+        double result = Unit.CELSIUS.convertTo(0, Unit.FAHRENHEIT);
+
+        assertEquals(32, result, 0.0);
+    }
+
+    @Test
+    public void convertTo_shouldReturn212_whenConverting100CelsiusToFahrenheit(){
+        double result = Unit.CELSIUS.convertTo(100, Unit.FAHRENHEIT);
+
+        assertEquals(212, result, 0.0);
+    }
+
+    @Test
+    public void convertTo_shouldReturn100_whenConverting212FahrenheitToCelsius(){
+        double result = Unit.FAHRENHEIT.convertTo(212, Unit.CELSIUS);
+
+        assertEquals(100, result, 0.0);
+    }
+
+    @Test
+    public void convertTo_shouldReturn0_whenConverting32FahrenheitToCelsius(){
+        double result = Unit.FAHRENHEIT.convertTo(32, Unit.CELSIUS);
+
+        assertEquals(0, result, 0.0);
+    }
 }
