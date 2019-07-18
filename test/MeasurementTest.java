@@ -68,4 +68,12 @@ public class MeasurementTest {
 
         assertEquals(thousandGrams, oneKilogram);
     }
+
+    @Test(expected = InvalidTypeConversionException.class)
+    public void equals_shouldReturnException_whenGiven1GramsEqualTo1Centimeter(){
+        Measurement oneGram = new Measurement(1, Unit.GRAM);
+        Measurement oneCentimeter= new Measurement(1, Unit.CENTIMETER);
+
+        assertEquals(oneGram, oneCentimeter);
+    }
 }

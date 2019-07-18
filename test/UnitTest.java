@@ -32,5 +32,4 @@ public class UnitTest {
         assertEquals(1, result, 0.0);
     }
 
-
 }
