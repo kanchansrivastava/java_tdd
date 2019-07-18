@@ -41,6 +41,7 @@ public class MeasurementTest {
 
         assertFalse(result);
     }
+
     @Test
     public void equals_shouldReturnTrue_whenGiven1000MeterEqualTo1Kilometer() {
         Measurement thousandMeter = new Measurement(1000, Unit.METER);
@@ -62,7 +63,7 @@ public class MeasurementTest {
     }
 
     @Test
-    public void equals_shouldReturnTrue_whenGiven1000GramsEqualTo1Kilogram(){
+    public void equals_shouldReturnTrue_whenGiven1000GramsEqualTo1Kilogram() {
         Measurement thousandGrams = new Measurement(1000, Unit.GRAM);
         Measurement oneKilogram = new Measurement(1, Unit.KILOGRAM);
 
@@ -70,9 +71,9 @@ public class MeasurementTest {
     }
 
     @Test(expected = InvalidTypeConversionException.class)
-    public void equals_shouldReturnException_whenGiven1GramsEqualTo1Centimeter(){
+    public void equals_shouldReturnException_whenGiven1GramsEqualTo1Centimeter() {
         Measurement oneGram = new Measurement(1, Unit.GRAM);
-        Measurement oneCentimeter= new Measurement(1, Unit.CENTIMETER);
+        Measurement oneCentimeter = new Measurement(1, Unit.CENTIMETER);
 
         assertEquals(oneGram, oneCentimeter);
     }

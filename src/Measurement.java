@@ -8,7 +8,7 @@ public class Measurement {
     }
 
     private boolean isEqual(Measurement anotherMeasurement) {
-        if (anotherMeasurement.unit != this.unit){
+        if (anotherMeasurement.unit != this.unit) {
             return anotherMeasurement.unit.convertTo(anotherMeasurement.value, this.unit) == this.value;
         }
         return anotherMeasurement.value == this.value;
