@@ -77,4 +77,26 @@ public class MeasurementTest {
 
         assertEquals(oneGram, oneCentimeter);
     }
+
+    @Test
+    public void add_shouldReturn200_when100CentimetersAddedTo1meter() {
+        Measurement hundredCentimeters = new Measurement(100, Unit.CENTIMETER);
+        Measurement oneMeter = new Measurement(1, Unit.METER);
+        Measurement expectedMeasurement = new Measurement(200, Unit.CENTIMETER);
+
+        Measurement twoHundredCentimeters = hundredCentimeters.add(oneMeter);
+
+        assertEquals(expectedMeasurement, twoHundredCentimeters);
+    }
+
+    @Test
+    public void add_shouldReturn2_when1meterAddedTo100Centimeters() {
+        Measurement oneMeter = new Measurement(1, Unit.METER);
+        Measurement hundredCentimeters = new Measurement(100, Unit.CENTIMETER);
+        Measurement expectedMeasurement = new Measurement(2, Unit.METER);
+
+        Measurement twoMeters = oneMeter.add(hundredCentimeters);
+
+        assertEquals(expectedMeasurement, twoMeters);
+    }
 }

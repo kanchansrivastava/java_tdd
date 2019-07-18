@@ -22,4 +22,9 @@ public class Measurement {
         return isEqual(measurement);
     }
 
+    public Measurement add(Measurement anotherMeasurement) {
+        double sum = anotherMeasurement.unit.convertTo(anotherMeasurement.value, this.unit) + this.value;
+        return new Measurement(sum, this.unit);
+
+    }
 }
