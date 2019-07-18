@@ -10,5 +10,5 @@ public enum Unit {
 
     public double convertTo(double value, Unit that) {
         return (value * that.factor)/this.factor;
-    };
+    }
 }
