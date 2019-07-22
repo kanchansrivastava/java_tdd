@@ -11,10 +11,10 @@ import static org.mockito.Mockito.*;
 public class ParkingLotTest {
 
     @Mock
-    Owner mockedOwner;
+    Notifiable mockedOwner;
 
     @Mock
-    TrafficCop mockedTrafficCop;
+    Notifiable mockedTrafficCop;
 
     @Test
     public void park_shouldParkCar_whenSpaceIsAvailableInParkingLot() {
@@ -139,6 +139,42 @@ public class ParkingLotTest {
 
         verify(mockedOwner).notifyParkingLotFull();
         verify(mockedTrafficCop).notifyParkingLotFull();
+
+
+    }
+
+    @Test
+    public void unpark_shouldSendNotificationToTrafficCopAndOwner_whenSpaceIsAvailableInParkingLot(){
+        ParkingLot parkingLot = ParkingLot.create(1);
+        parkingLot.addOwner(mockedOwner);
+        parkingLot.addTrafficCop(mockedTrafficCop);
+        Vehicle car = new Vehicle("123");
+        doNothing().when(mockedOwner).notifySpaceIsAvailable();
+        doNothing().when(mockedTrafficCop).notifySpaceIsAvailable();
+        parkingLot.park(car);
+
+        parkingLot.unpark(car);
+
+        verify(mockedOwner).notifySpaceIsAvailable();
+        verify(mockedTrafficCop).notifySpaceIsAvailable();
+
+
+    }
+
+    @Test
+    public void unpark_shouldNotSendNotificationToTrafficCopAndOwner_whenSpaceIsAvailableInParkingLot(){
+        ParkingLot parkingLot = ParkingLot.create(2);
+        parkingLot.addOwner(mockedOwner);
+        parkingLot.addTrafficCop(mockedTrafficCop);
+        Vehicle car = new Vehicle("123");
+        doNothing().when(mockedOwner).notifySpaceIsAvailable();
+        doNothing().when(mockedTrafficCop).notifySpaceIsAvailable();
+        parkingLot.park(car);
+
+        parkingLot.unpark(car);
+
+        verify(mockedOwner, never()).notifySpaceIsAvailable();
+        verify(mockedTrafficCop, never()).notifySpaceIsAvailable();
 
 
     }

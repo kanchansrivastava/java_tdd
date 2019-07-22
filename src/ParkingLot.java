@@ -6,8 +6,8 @@ public class ParkingLot {
     private final static int MINIMUM_NUMBER_OF_SLOTS = 1;
     private final int totalSlots;
     private Set<Vehicle> vehicles = new HashSet<Vehicle>(0);
-    private Owner owner;
-    private TrafficCop trafficCop;
+    private Notifiable owner;
+    private Notifiable trafficCop;
 
     private ParkingLot(int maxSlots) {
         this.totalSlots = maxSlots;
@@ -60,7 +60,19 @@ public class ParkingLot {
         vehicles.remove(vehicle);
 
         if (totalSlots - vehicles.size() == 1) {
+            this.notifySpaceIsAvailable();
+        }
+    }
+
+    private void notifySpaceIsAvailable() {
+        if (owner != null){
             owner.notifySpaceIsAvailable();
+
+        }
+
+        if (trafficCop != null) {
+            trafficCop.notifySpaceIsAvailable();
+
         }
     }
 
@@ -68,11 +80,11 @@ public class ParkingLot {
         return vehicles.contains(vehicle);
     }
 
-    public void addOwner(Owner owner) {
+    public void addOwner(Notifiable owner) {
         this.owner = owner;
     }
 
-    public void addTrafficCop(TrafficCop trafficCop) {
+    public void addTrafficCop(Notifiable trafficCop) {
         this.trafficCop =  trafficCop;
     }
 }

@@ -1,4 +1,5 @@
-public interface Owner {
+
+public interface Notifiable {
 
     void notifyParkingLotFull();
 
