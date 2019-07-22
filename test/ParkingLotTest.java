@@ -5,14 +5,16 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ParkingLotTest {
 
     @Mock
     Owner mockedOwner;
+
+    @Mock
+    TrafficCop mockedTrafficCop;
 
     @Test
     public void park_shouldParkCar_whenSpaceIsAvailableInParkingLot() {
@@ -68,7 +70,7 @@ public class ParkingLotTest {
 
     }
 
-    @Test()
+    @Test
     public void park_shouldSendNotificationToOwner_whenParkingLotIsFull(){
         ParkingLot parkingLot = ParkingLot.create(1);
         parkingLot.addOwner(mockedOwner);
@@ -82,7 +84,7 @@ public class ParkingLotTest {
 
     }
 
-    @Test()
+    @Test
     public void unpark_shouldNotifyOwner_whenSpaceIsAvailableInParkingLot(){
         ParkingLot parkingLot = ParkingLot.create(1);
         parkingLot.addOwner(mockedOwner);
@@ -93,6 +95,51 @@ public class ParkingLotTest {
         parkingLot.unpark(car);
 
         verify(mockedOwner).notifySpaceIsAvailable();
+
+    }
+
+    @Test
+    public void park_shouldSendNotificationToTrafficCop_whenParkingLotIsFull(){
+        ParkingLot parkingLot = ParkingLot.create(1);
+        parkingLot.addTrafficCop(mockedTrafficCop);
+        Vehicle car = new Vehicle("123");
+        doNothing().when(mockedTrafficCop).notifyParkingLotFull();
+
+        parkingLot.park(car);
+
+        verify(mockedTrafficCop).notifyParkingLotFull();
+
+
+    }
+
+    @Test
+    public void park_shouldSendNotificationToTrafficCop_whenParkingLotIsNotFull(){
+        ParkingLot parkingLot = ParkingLot.create(2);
+        parkingLot.addTrafficCop(mockedTrafficCop);
+        Vehicle car = new Vehicle("123");
+        doNothing().when(mockedTrafficCop).notifyParkingLotFull();
+
+        parkingLot.park(car);
+
+        verify(mockedTrafficCop, never()).notifyParkingLotFull();
+
+
+    }
+
+    @Test
+    public void park_shouldSendNotificationToTrafficCopAndOwner_whenParkingLotIsFull(){
+        ParkingLot parkingLot = ParkingLot.create(1);
+        parkingLot.addOwner(mockedOwner);
+        parkingLot.addTrafficCop(mockedTrafficCop);
+        Vehicle car = new Vehicle("123");
+        doNothing().when(mockedOwner).notifySpaceIsAvailable();
+        doNothing().when(mockedTrafficCop).notifyParkingLotFull();
+
+        parkingLot.park(car);
+
+        verify(mockedOwner).notifyParkingLotFull();
+        verify(mockedTrafficCop).notifyParkingLotFull();
+
 
     }
 }

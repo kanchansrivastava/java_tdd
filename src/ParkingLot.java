@@ -7,6 +7,7 @@ public class ParkingLot {
     private final int totalSlots;
     private Set<Vehicle> vehicles = new HashSet<Vehicle>(0);
     private Owner owner;
+    private TrafficCop trafficCop;
 
     private ParkingLot(int maxSlots) {
         this.totalSlots = maxSlots;
@@ -32,7 +33,7 @@ public class ParkingLot {
         vehicles.add(vehicle);
 
         if (isFull()) {
-            notifyOwner();
+            notifyParkingLotFull();
         }
     }
 
@@ -40,8 +41,14 @@ public class ParkingLot {
         return vehicles.size() == totalSlots;
     }
 
-    private void notifyOwner(){
-        owner.notifyParkingLotFull();
+    private void notifyParkingLotFull(){
+        if (owner != null){
+            owner.notifyParkingLotFull();
+        }
+        if (trafficCop != null){
+            trafficCop.notifyParkingLotFull();
+        }
+
     }
 
     public void unpark(Vehicle vehicle) {
@@ -63,5 +70,9 @@ public class ParkingLot {
 
     public void addOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public void addTrafficCop(TrafficCop trafficCop) {
+        this.trafficCop =  trafficCop;
     }
 }
