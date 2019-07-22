@@ -73,7 +73,7 @@ public class ParkingLotTest {
     @Test
     public void park_shouldSendNotificationToOwner_whenParkingLotIsFull(){
         ParkingLot parkingLot = ParkingLot.create(1);
-        parkingLot.addOwner(mockedOwner);
+        parkingLot.addNotifiable(mockedOwner);
         Vehicle car = new Vehicle("123");
         doNothing().when(mockedOwner).notifyParkingLotFull();
 
@@ -87,7 +87,7 @@ public class ParkingLotTest {
     @Test
     public void unpark_shouldNotifyOwner_whenSpaceIsAvailableInParkingLot(){
         ParkingLot parkingLot = ParkingLot.create(1);
-        parkingLot.addOwner(mockedOwner);
+        parkingLot.addNotifiable(mockedOwner);
         Vehicle car = new Vehicle("123");
         parkingLot.park(car);
         doNothing().when(mockedOwner).notifySpaceIsAvailable();
@@ -101,7 +101,7 @@ public class ParkingLotTest {
     @Test
     public void park_shouldSendNotificationToTrafficCop_whenParkingLotIsFull(){
         ParkingLot parkingLot = ParkingLot.create(1);
-        parkingLot.addTrafficCop(mockedTrafficCop);
+        parkingLot.addNotifiable(mockedTrafficCop);
         Vehicle car = new Vehicle("123");
         doNothing().when(mockedTrafficCop).notifyParkingLotFull();
 
@@ -115,7 +115,7 @@ public class ParkingLotTest {
     @Test
     public void park_shouldSendNotificationToTrafficCop_whenParkingLotIsNotFull(){
         ParkingLot parkingLot = ParkingLot.create(2);
-        parkingLot.addTrafficCop(mockedTrafficCop);
+        parkingLot.addNotifiable(mockedTrafficCop);
         Vehicle car = new Vehicle("123");
         doNothing().when(mockedTrafficCop).notifyParkingLotFull();
 
@@ -129,8 +129,8 @@ public class ParkingLotTest {
     @Test
     public void park_shouldSendNotificationToTrafficCopAndOwner_whenParkingLotIsFull(){
         ParkingLot parkingLot = ParkingLot.create(1);
-        parkingLot.addOwner(mockedOwner);
-        parkingLot.addTrafficCop(mockedTrafficCop);
+        parkingLot.addNotifiable(mockedOwner);
+        parkingLot.addNotifiable(mockedTrafficCop);
         Vehicle car = new Vehicle("123");
         doNothing().when(mockedOwner).notifySpaceIsAvailable();
         doNothing().when(mockedTrafficCop).notifyParkingLotFull();
@@ -146,8 +146,8 @@ public class ParkingLotTest {
     @Test
     public void unpark_shouldSendNotificationToTrafficCopAndOwner_whenSpaceIsAvailableInParkingLot(){
         ParkingLot parkingLot = ParkingLot.create(1);
-        parkingLot.addOwner(mockedOwner);
-        parkingLot.addTrafficCop(mockedTrafficCop);
+        parkingLot.addNotifiable(mockedOwner);
+        parkingLot.addNotifiable(mockedTrafficCop);
         Vehicle car = new Vehicle("123");
         doNothing().when(mockedOwner).notifySpaceIsAvailable();
         doNothing().when(mockedTrafficCop).notifySpaceIsAvailable();
@@ -164,8 +164,8 @@ public class ParkingLotTest {
     @Test
     public void unpark_shouldNotSendNotificationToTrafficCopAndOwner_whenSpaceIsAvailableInParkingLot(){
         ParkingLot parkingLot = ParkingLot.create(2);
-        parkingLot.addOwner(mockedOwner);
-        parkingLot.addTrafficCop(mockedTrafficCop);
+        parkingLot.addNotifiable(mockedOwner);
+        parkingLot.addNotifiable(mockedTrafficCop);
         Vehicle car = new Vehicle("123");
         doNothing().when(mockedOwner).notifySpaceIsAvailable();
         doNothing().when(mockedTrafficCop).notifySpaceIsAvailable();

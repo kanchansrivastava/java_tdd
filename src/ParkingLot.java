@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ParkingLot {
@@ -6,11 +8,22 @@ public class ParkingLot {
     private final static int MINIMUM_NUMBER_OF_SLOTS = 1;
     private final int totalSlots;
     private Set<Vehicle> vehicles = new HashSet<Vehicle>(0);
-    private Notifiable owner;
-    private Notifiable trafficCop;
+    private List<Notifiable> notifiables = new ArrayList<>();
 
     private ParkingLot(int maxSlots) {
         this.totalSlots = maxSlots;
+    }
+
+    private boolean isFull() {
+        return vehicles.size() == totalSlots;
+    }
+
+    private void notifySpaceIsAvailable() {
+        this.notifiables.forEach(Notifiable::notifySpaceIsAvailable);
+    }
+
+    private void notifyParkingLotFull(){
+        this.notifiables.forEach(Notifiable::notifyParkingLotFull);
     }
 
     public static ParkingLot create(int slots) {
@@ -18,6 +31,10 @@ public class ParkingLot {
             throw new InvalidParkingLotSpaceException();
         }
         return new ParkingLot(slots);
+    }
+
+    public boolean isParked(Vehicle vehicle) {
+        return vehicles.contains(vehicle);
     }
 
     public void park(Vehicle vehicle) {
@@ -37,20 +54,6 @@ public class ParkingLot {
         }
     }
 
-    private boolean isFull() {
-        return vehicles.size() == totalSlots;
-    }
-
-    private void notifyParkingLotFull(){
-        if (owner != null){
-            owner.notifyParkingLotFull();
-        }
-        if (trafficCop != null){
-            trafficCop.notifyParkingLotFull();
-        }
-
-    }
-
     public void unpark(Vehicle vehicle) {
 
         if (!vehicles.contains(vehicle)) {
@@ -64,27 +67,8 @@ public class ParkingLot {
         }
     }
 
-    private void notifySpaceIsAvailable() {
-        if (owner != null){
-            owner.notifySpaceIsAvailable();
-
-        }
-
-        if (trafficCop != null) {
-            trafficCop.notifySpaceIsAvailable();
-
-        }
+    public void addNotifiable(Notifiable notifiable) {
+        this.notifiables.add(notifiable);
     }
 
-    public boolean isParked(Vehicle vehicle) {
-        return vehicles.contains(vehicle);
-    }
-
-    public void addOwner(Notifiable owner) {
-        this.owner = owner;
-    }
-
-    public void addTrafficCop(Notifiable trafficCop) {
-        this.trafficCop =  trafficCop;
-    }
 }
