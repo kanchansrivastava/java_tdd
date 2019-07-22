@@ -1,9 +1,18 @@
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ParkingLotTest {
+
+    @Mock
+    Owner mockedOwner;
 
     @Test
     public void park_shouldParkCar_whenSpaceIsAvailableInParkingLot() {
@@ -56,6 +65,20 @@ public class ParkingLotTest {
         ParkingLot parkingLot = ParkingLot.create(10);
 
         parkingLot.unpark(car);
+
+    }
+
+    @Test()
+    public void park_shouldSendNotificationToOwner_whenParkingLotIsFull(){
+        ParkingLot parkingLot = ParkingLot.create(1);
+        parkingLot.setOwner(mockedOwner);
+        Vehicle car = new Vehicle("123");
+        doNothing().when(mockedOwner).notifyParkingLotFull();
+
+        parkingLot.park(car);
+
+        verify(mockedOwner).notifyParkingLotFull();
+
 
     }
 
