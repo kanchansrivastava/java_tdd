@@ -71,7 +71,7 @@ public class ParkingLotTest {
     @Test()
     public void park_shouldSendNotificationToOwner_whenParkingLotIsFull(){
         ParkingLot parkingLot = ParkingLot.create(1);
-        parkingLot.setOwner(mockedOwner);
+        parkingLot.addOwner(mockedOwner);
         Vehicle car = new Vehicle("123");
         doNothing().when(mockedOwner).notifyParkingLotFull();
 
@@ -82,4 +82,17 @@ public class ParkingLotTest {
 
     }
 
+    @Test()
+    public void unpark_shouldNotifyOwner_whenSpaceIsAvailableInParkingLot(){
+        ParkingLot parkingLot = ParkingLot.create(1);
+        parkingLot.addOwner(mockedOwner);
+        Vehicle car = new Vehicle("123");
+        parkingLot.park(car);
+        doNothing().when(mockedOwner).notifySpaceIsAvailable();
+
+        parkingLot.unpark(car);
+
+        verify(mockedOwner).notifySpaceIsAvailable();
+
+    }
 }

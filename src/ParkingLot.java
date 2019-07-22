@@ -25,15 +25,19 @@ public class ParkingLot {
             throw new VehicleAlreadyParkedException();
         }
 
-        if (vehicles.size() == totalSlots) {
+        if  (isFull()) {
             throw new ParkingLotAlreadyFullException();
         }
 
         vehicles.add(vehicle);
 
-        if (vehicles.size() == totalSlots) {
+        if (isFull()) {
             notifyOwner();
         }
+    }
+
+    private boolean isFull() {
+        return vehicles.size() == totalSlots;
     }
 
     private void notifyOwner(){
@@ -47,13 +51,17 @@ public class ParkingLot {
         }
 
         vehicles.remove(vehicle);
+
+        if (totalSlots - vehicles.size() == 1) {
+            owner.notifySpaceIsAvailable();
+        }
     }
 
     public boolean isParked(Vehicle vehicle) {
         return vehicles.contains(vehicle);
     }
 
-    public void setOwner(Owner owner) {
+    public void addOwner(Owner owner) {
         this.owner = owner;
     }
 }
