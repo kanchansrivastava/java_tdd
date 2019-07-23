@@ -1,4 +1,6 @@
- public class Probability {
+package probability;
+
+public class Probability {
     private double value;
     private final int MAX_PROBABILITY = 1;
 

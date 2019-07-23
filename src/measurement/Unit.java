@@ -1,3 +1,5 @@
+package measurement;
+
 public enum Unit {
 
     CENTIMETER(100000, UnitType.DISTANCE, 0), METER(1000, UnitType.DISTANCE, 0), KILOMETER(1, UnitType.DISTANCE, 0),

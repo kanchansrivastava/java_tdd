@@ -1,3 +1,5 @@
+package measurement;
+
 public class Measurement {
     private final double value;
     private final Unit unit;
@@ -27,7 +29,7 @@ public class Measurement {
 
     @Override
     public String toString() {
-        return String.format("Value: %.2f, Unit : %s", this.value, this.unit);
+        return String.format("Value: %.2f, measurement.Unit : %s", this.value, this.unit);
     }
 
     @Override

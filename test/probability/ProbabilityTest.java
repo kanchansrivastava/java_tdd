@@ -1,3 +1,6 @@
+package probability;
+
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,7 +14,7 @@ public class ProbabilityTest {
         Probability probability1 = new Probability(0.5);
         Probability probability2 = new Probability(0.5);
 
-        assertEquals(probability1, probability2);
+        Assert.assertEquals(probability1, probability2);
     }
 
     @Test
@@ -45,7 +48,7 @@ public class ProbabilityTest {
 
         Probability combineProbability = probability1.and(probability2);
 
-        assertEquals(expectedProbability, combineProbability);
+        Assert.assertEquals(expectedProbability, combineProbability);
     }
 
     @Test
@@ -55,7 +58,7 @@ public class ProbabilityTest {
 
         Probability complementProbability = probability.complement();
 
-        assertEquals(expectedComplementProbability, complementProbability);
+        Assert.assertEquals(expectedComplementProbability, complementProbability);
 
     }
 
@@ -67,7 +70,7 @@ public class ProbabilityTest {
 
         Probability combineProbability = probability1.or(probability2);
 
-        assertEquals(expectedProbability, combineProbability);
+        Assert.assertEquals(expectedProbability, combineProbability);
 
     }
 }

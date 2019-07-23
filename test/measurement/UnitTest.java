@@ -1,3 +1,6 @@
+package measurement;
+
+import measurement.Unit;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,3 +1,8 @@
+package measurement;
+
+import measurement.InvalidTypeConversionException;
+import measurement.Measurement;
+import measurement.Unit;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

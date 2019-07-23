@@ -1,4 +1,7 @@
+package shape;
+
 import org.junit.Test;
+import shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 

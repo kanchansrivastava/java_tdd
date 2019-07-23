@@ -1,9 +1,13 @@
+package parking_lot;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import parking_lot.Attendant;
+import parking_lot.ParkingLot;
+import parking_lot.Vehicle;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -1,3 +1,5 @@
+package parking_lot;
+
 import java.util.Objects;
 
 public class Vehicle {

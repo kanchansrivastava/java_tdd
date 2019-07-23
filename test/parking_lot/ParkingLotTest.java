@@ -1,7 +1,10 @@
+package parking_lot;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import parking_lot.*;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

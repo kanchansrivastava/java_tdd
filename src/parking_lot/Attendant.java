@@ -1,3 +1,5 @@
+package parking_lot;
+
 public class Attendant {
     private ParkingLot parkingLot;
     public Attendant(ParkingLot parkingLot) {
