@@ -78,11 +78,11 @@ public class ParkingLotTest {
         ParkingLot parkingLot = ParkingLot.create(1);
         parkingLot.addNotifiable(mockedOwner);
         Vehicle car = new Vehicle("123");
-        doNothing().when(mockedOwner).notifyParkingLotFull();
+        doNothing().when(mockedOwner).notifyParkingLotFull(parkingLot);
 
         parkingLot.park(car);
 
-        verify(mockedOwner).notifyParkingLotFull();
+        verify(mockedOwner).notifyParkingLotFull(parkingLot);
 
 
     }
@@ -106,11 +106,11 @@ public class ParkingLotTest {
         ParkingLot parkingLot = ParkingLot.create(1);
         parkingLot.addNotifiable(mockedTrafficCop);
         Vehicle car = new Vehicle("123");
-        doNothing().when(mockedTrafficCop).notifyParkingLotFull();
+        doNothing().when(mockedTrafficCop).notifyParkingLotFull(parkingLot);
 
         parkingLot.park(car);
 
-        verify(mockedTrafficCop).notifyParkingLotFull();
+        verify(mockedTrafficCop).notifyParkingLotFull(parkingLot);
 
 
     }
@@ -120,11 +120,11 @@ public class ParkingLotTest {
         ParkingLot parkingLot = ParkingLot.create(2);
         parkingLot.addNotifiable(mockedTrafficCop);
         Vehicle car = new Vehicle("123");
-        doNothing().when(mockedTrafficCop).notifyParkingLotFull();
+        doNothing().when(mockedTrafficCop).notifyParkingLotFull(parkingLot);
 
         parkingLot.park(car);
 
-        verify(mockedTrafficCop, never()).notifyParkingLotFull();
+        verify(mockedTrafficCop, never()).notifyParkingLotFull(parkingLot);
 
 
     }
@@ -136,12 +136,12 @@ public class ParkingLotTest {
         parkingLot.addNotifiable(mockedTrafficCop);
         Vehicle car = new Vehicle("123");
         doNothing().when(mockedOwner).notifySpaceIsAvailable();
-        doNothing().when(mockedTrafficCop).notifyParkingLotFull();
+        doNothing().when(mockedTrafficCop).notifyParkingLotFull(parkingLot);
 
         parkingLot.park(car);
 
-        verify(mockedOwner).notifyParkingLotFull();
-        verify(mockedTrafficCop).notifyParkingLotFull();
+        verify(mockedOwner).notifyParkingLotFull(parkingLot);
+        verify(mockedTrafficCop).notifyParkingLotFull(parkingLot);
 
 
     }

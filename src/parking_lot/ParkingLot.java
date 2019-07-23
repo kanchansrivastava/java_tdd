@@ -25,7 +25,7 @@ public class ParkingLot {
     }
 
     private void notifyParkingLotFull(){
-        this.notifiables.forEach(Notifiable::notifyParkingLotFull);
+        this.notifiables.forEach(notifiable -> notifiable.notifyParkingLotFull(this));
     }
 
     public static ParkingLot create(int slots) {

@@ -2,7 +2,7 @@ package parking_lot;
 
 public interface Notifiable {
 
-    void notifyParkingLotFull();
+    void notifyParkingLotFull(ParkingLot parkingLot);
 
     void notifySpaceIsAvailable();
 }
