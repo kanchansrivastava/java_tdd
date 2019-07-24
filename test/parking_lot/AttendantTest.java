@@ -36,6 +36,9 @@ public class AttendantTest {
         Attendant attendant = new Attendant(parkingLots);
         Vehicle vehicle = new Vehicle("KA03MC931");
 
+        when(mockedParkingLot.isParked(vehicle)).thenReturn(true);
+
+        attendant.park(vehicle);
         attendant.unpark(vehicle);
 
         verify(mockedParkingLot).unpark(vehicle);
