@@ -12,11 +12,22 @@ public class Attendant implements Notifiable {
         this.availableParkingLots.addAll(parkingLots);
     }
 
-    public void park(Vehicle vehicle) {
+    public void park(Vehicle vehicle, ParkingCriteria parkingCriteria) {
         if (availableParkingLots.isEmpty()) {
             throw new NoParkingLotsAvailableException();
         }
-        availableParkingLots.get(0).park(vehicle);
+        if(parkingCriteria.equals(ParkingCriteria.MAX_SPACE)) {
+            ParkingLot parkingLotWithMaxSpace = availableParkingLots.get(0);
+            for (ParkingLot parkingLot:availableParkingLots) {
+                if (parkingLot.hasMoreSpaceThan(parkingLotWithMaxSpace)){
+                    parkingLotWithMaxSpace = parkingLot;
+                }
+            }
+            parkingLotWithMaxSpace.park(vehicle);
+        }
+        if (parkingCriteria.equals(ParkingCriteria.FIRST_AVAILABLE)) {
+            availableParkingLots.get(0).park(vehicle);
+        }
     }
 
     public void unpark(Vehicle vehicle) {

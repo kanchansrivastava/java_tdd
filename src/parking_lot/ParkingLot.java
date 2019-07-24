@@ -24,6 +24,10 @@ public class ParkingLot {
         this.notifiables.forEach(Notifiable::notifySpaceIsAvailable);
     }
 
+    private int getFreeSpace() {
+        return this.totalSlots - this.vehicles.size();
+    }
+
     private void notifyParkingLotFull(){
         this.notifiables.forEach(notifiable -> notifiable.notifyParkingLotFull(this));
     }
@@ -73,4 +77,10 @@ public class ParkingLot {
         this.notifiables.add(notifiable);
     }
 
+    public boolean hasMoreSpaceThan(ParkingLot otherParkingLot) {
+        return otherParkingLot.getFreeSpace() < this.getFreeSpace();
+    }
+
 }
+
+

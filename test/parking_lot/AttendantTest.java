@@ -24,7 +24,7 @@ public class AttendantTest {
         Attendant attendant = new Attendant(parkingLots);
         Vehicle vehicle = new Vehicle("KA03MC931");
 
-        attendant.park(vehicle);
+        attendant.park(vehicle, ParkingCriteria.FIRST_AVAILABLE);
 
         verify(mockedParkingLot).park(vehicle);
 
@@ -38,7 +38,7 @@ public class AttendantTest {
 
         when(mockedParkingLot.isParked(vehicle)).thenReturn(true);
 
-        attendant.park(vehicle);
+        attendant.park(vehicle, ParkingCriteria.FIRST_AVAILABLE);
         attendant.unpark(vehicle);
 
         verify(mockedParkingLot).unpark(vehicle);
@@ -53,7 +53,7 @@ public class AttendantTest {
 
         Vehicle vehicle1 = new Vehicle("KA03MC931");
 
-        attendant.park(vehicle1);
+        attendant.park(vehicle1, ParkingCriteria.FIRST_AVAILABLE);
 
         assertTrue(parkingLot1.isParked(vehicle1));
     }
@@ -71,8 +71,8 @@ public class AttendantTest {
         parkingLot1.addNotifiable(attendant);
         parkingLot2.addNotifiable(attendant);
 
-        attendant.park(vehicle1);
-        attendant.park(vehicle2);
+        attendant.park(vehicle1, ParkingCriteria.FIRST_AVAILABLE);
+        attendant.park(vehicle2, ParkingCriteria.FIRST_AVAILABLE);
 
         assertTrue(parkingLot1.isParked(vehicle1));
         assertTrue(parkingLot2.isParked(vehicle2));
@@ -92,9 +92,9 @@ public class AttendantTest {
         parkingLot1.addNotifiable(attendant);
         parkingLot2.addNotifiable(attendant);
 
-        attendant.park(vehicle1);
-        attendant.park(vehicle2);
-        attendant.park(vehicle3);
+        attendant.park(vehicle1, ParkingCriteria.FIRST_AVAILABLE);
+        attendant.park(vehicle2, ParkingCriteria.FIRST_AVAILABLE);
+        attendant.park(vehicle3, ParkingCriteria.FIRST_AVAILABLE);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class AttendantTest {
 
         Vehicle vehicle1 = new Vehicle("KA03MC931");
 
-        attendant.park(vehicle1);
+        attendant.park(vehicle1, ParkingCriteria.FIRST_AVAILABLE);
         attendant.unpark(vehicle1);
 
         assertFalse(parkingLot1.isParked(vehicle1));
@@ -120,8 +120,8 @@ public class AttendantTest {
 
         parkingLot1.addNotifiable(attendant);
         parkingLot2.addNotifiable(attendant);
-        attendant.park(vehicle1);
-        attendant.park(vehicle2);
+        attendant.park(vehicle1, ParkingCriteria.FIRST_AVAILABLE);
+        attendant.park(vehicle2, ParkingCriteria.FIRST_AVAILABLE);
         attendant.unpark(vehicle2);
 
         assertTrue(parkingLot1.isParked(vehicle1));
@@ -142,9 +142,21 @@ public class AttendantTest {
         parkingLot1.addNotifiable(attendant);
         parkingLot2.addNotifiable(attendant);
 
-        attendant.park(vehicle1);
-        attendant.park(vehicle2);
+        attendant.park(vehicle1, ParkingCriteria.FIRST_AVAILABLE);
+        attendant.park(vehicle2, ParkingCriteria.FIRST_AVAILABLE);
         attendant.unpark(vehicle3);
+    }
+
+    @Test
+    public void park_shouldParkCarInParkingLot2_whenGivenParkingLot1Has3FreeSpaceAndParkingLot2Has5FreeSpace(){
+        ParkingLot parkingLot1 = ParkingLot.create(3);
+        ParkingLot parkingLot2 = ParkingLot.create(5);
+        Attendant attendant = new Attendant(Arrays.asList(parkingLot1, parkingLot2));
+        Vehicle vehicle1 = new Vehicle("KA03MC931");
+
+        attendant.park(vehicle1, ParkingCriteria.MAX_SPACE);
+
+        assertTrue(parkingLot2.isParked(vehicle1));
     }
 
 

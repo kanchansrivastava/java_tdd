@@ -179,6 +179,26 @@ public class ParkingLotTest {
         verify(mockedOwner, never()).notifySpaceIsAvailable();
         verify(mockedTrafficCop, never()).notifySpaceIsAvailable();
 
+    }
+
+    @Test
+    public void hasMoreSpaceThan_shouldReturnFalse_whenParkingLot1HasLessSpaceThanParkingLot2(){
+        ParkingLot parkingLot1 = ParkingLot.create(3);
+        ParkingLot parkingLot2 = ParkingLot.create(5);
+
+        boolean result = parkingLot1.hasMoreSpaceThan(parkingLot2);
+
+        assertFalse(result);
+
+    }
+    @Test
+    public void hasMoreSpaceThan_shouldReturnTrue_whenParkingLot2HasMoreSpaceThanParkingLot1(){
+        ParkingLot parkingLot1 = ParkingLot.create(3);
+        ParkingLot parkingLot2 = ParkingLot.create(5);
+
+        boolean result = parkingLot2.hasMoreSpaceThan(parkingLot1);
+
+        assertTrue(result);
 
     }
 }
